@@ -1,111 +1,102 @@
 package masterMindGame2;
+import java.util.*;
 
-public class MasterMindGame2
-{
+public class MasterMindGame2 {
 
-    public static void main(String[] args)
-    {
-	String breakerA1 = "C";
-	String breakerB1 = "C";
-	String breakerC1 = "C";
-	String breakerD1 = "C";
-	
-	String masterA1 = "C";
-	String masterB1 = "C";
-	String masterC1 = "C";
-	String masterD1 = "C";
-	
-	String breakerA2 = "C";
-	String breakerB2 = "C";
-	String breakerC2 = "C";
-	String breakerD2 = "C";
-	
-	String masterA2 = "C";
-	String masterB2 = "C";
-	String masterC2 = "C";
-	String masterD2 = "C";
-	
-	String breakerA3 = "C";
-	String breakerB3 = "C";
-	String breakerC3 = "C";
-	String breakerD3 = "C";
-	
-	String masterA3 = "C";
-	String masterB3 = "C";
-	String masterC3 = "C";
-	String masterD3 = "C";
-	
-	String breakerA4 = "C";
-	String breakerB4 = "C";
-	String breakerC4 = "C";
-	String breakerD4 = "C";
-	
-	String masterA4 = "C";
-	String masterB4 = "C";
-	String masterC4 = "C";
-	String masterD4 = "C";
-	
-	String breakerA5 = "C";
-	String breakerB5 = "C";
-	String breakerC5 = "C";
-	String breakerD5 = "C";
-	
-	String masterA5 = "C";
-	String masterB5 = "C";
-	String masterC5 = "C";
-	String masterD5 = "C";
-	
-	String breakerA6 = "C";
-	String breakerB6 = "C";
-	String breakerC6 = "C";
-	String breakerD6 = "C";
-
-	String masterA6 = "C";
-	String masterB6 = "C";
-	String masterC6 = "C";
-	String masterD6 = "C";
-	
-	String breakerA7 = "C";
-	String breakerB7 = "C";
-	String breakerC7 = "C";
-	String breakerD7 = "C";
-	
-	String masterA7 = "C";
-	String masterB7 = "C";
-	String masterC7 = "C";
-	String masterD7 = "C";
-	
-	String breakerA8 = "C";
-	String breakerB8 = "C";
-	String breakerC8 = "C";
-	String breakerD8 = "C";
-	
-	String masterA8 = "C";
-	String masterB8 = "C";
-	String masterC8 = "C";
-	String masterD8 = "C";
-	
-	String breakerA9 = "C";
-	String breakerB9 = "C";
-	String breakerC9 = "C";
-	String breakerD9 = "C";
-	
-	String masterA9 = "C";
-	String masterB9 = "C";
-	String masterC9 = "C";
-	String masterD9 = "C";
-	
-	String breakerA10 = "C";
-	String breakerB10 = "C";
-	String breakerC10 = "C";
-	String breakerD10 = "C";
-	
-	String masterA10 = "C";
-	String masterB10 = "C";
-	String masterC10 = "C";
-	String masterD10 = "C";
-	
-	System.out.println(breakerA1);
-    }
+    public static void main(String[] args) {
+    	
+    	String name;
+    	String bobTheCharacter;
+    	String secretCode = "";
+    	String userCode;
+    	String outputCode = "";
+    	
+    	int i;
+    	int i2;
+    	int randomLetter;
+    	int guesses = 10;
+    	int codeLength = 4;
+    	int colorCount = 6;
+    	
+    	boolean firstAttempt = false;
+    	boolean wrongInput = true;
+    	
+    	Scanner sc = new Scanner(System.in);
+    	Random r = new Random();
+    	
+    	ArrayList<String> colors = new ArrayList<>();
+    	colors.add("R");
+    	colors.add("G");
+    	colors.add("B");
+    	colors.add("Y");
+    	colors.add("P");
+    	colors.add("O");
+    	
+    	//welcome message
+    	
+    	
+    	System.out.println("Welcome To MasterMind!\r\n" +
+    					   "Please... (drumroll.mp4) Enter Your Name Down Below!\r\n");
+    	name = sc.nextLine();
+    	
+    	for (i = 0; i < codeLength; i++) {
+    		randomLetter = r.nextInt(colorCount - 1);
+    		secretCode = secretCode + colors.get(randomLetter);
+    	}
+    	if (name.equals("Admin")) {
+    		System.out.println(secretCode);
+    	}
+    	
+    	System.out.println("Hello, " + name + "! Lets Stop All This Yapping And Get Straight To Bussiness!");
+    	
+    	//beginning game
+    	for (i = 0; i < guesses; i++) {
+    		System.out.println("\r\nGuess: " + (i + 1) + "/10\r\n" +
+    					       "Please Choose Out Of Any Of The Following Colors: \r\n" + colors);
+    		userCode = sc.nextLine();
+    		
+    		firstAttempt = true;
+    		userCode = userCode.toUpperCase();
+    		
+    		if (secretCode.equals(userCode)) {
+    			System.out.println("Wow! You Did It!");
+    			return;
+    		}
+    		
+    		if (userCode.length() != codeLength) {
+    			System.out.println("\r\nERROR\r\n" +
+    							   "Please Enter A Code With At Least " + codeLength + " Characters Long\r\n");
+    			i--;
+    			continue;
+    		}
+    		
+    		for (i2 = 0; i2 < codeLength; i2++) {
+    			
+    			bobTheCharacter = "" + userCode.charAt(i2);
+    			if (colors.contains(bobTheCharacter)) {
+    				
+	    			if (secretCode.charAt(i2) == userCode.charAt(i2)) {
+	    				outputCode = outputCode + "B";
+    				}
+    				else if(secretCode.contains(bobTheCharacter)) {
+    					outputCode = outputCode + "W";
+    				}
+    				else {
+    					outputCode = outputCode + "-";
+    				}
+    			}
+    			else {
+    	    		wrongInput = true;
+    	    		firstAttempt = false;
+    	    		i--;
+    	    		continue;
+    	    	}
+    		}
+    		System.out.println("\r\n" + outputCode);
+    	}
+    	System.out.println("Womp Womp!");
+    	
+    	sc.close();
+	}
 
 }
