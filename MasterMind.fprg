@@ -1,0 +1,112 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="4.2">
+    <attributes>
+        <attribute name="name" value="kut"/>
+        <attribute name="authors" value="famil"/>
+        <attribute name="about" value=""/>
+        <attribute name="saved" value="2024-09-30 03:30:25 PM"/>
+        <attribute name="created" value="ZmFtaWw7RVdBTjsyMDI0LTA5LTI3OzAxOjU5OjAxIFBNOzIxMDY="/>
+        <attribute name="edited" value="ZmFtaWw7RVdBTjsyMDI0LTA5LTMwOzAzOjMwOjI1IFBNOzM7MjIwNw=="/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body>
+            <declare name="name" type="String" array="False" size=""/>
+            <declare name="bobTheCharacter" type="String" array="False" size=""/>
+            <declare name="secretCode" type="String" array="False" size=""/>
+            <assign variable="secretCode" expression="&quot;&quot;"/>
+            <declare name="userCode" type="String" array="False" size=""/>
+            <declare name="outputCode" type="String" array="False" size=""/>
+            <assign variable="outputCode" expression="&quot;&quot;"/>
+            <declare name="i" type="Integer" array="False" size=""/>
+            <declare name="i2" type="Integer" array="False" size=""/>
+            <declare name="i3" type="Integer" array="False" size=""/>
+            <declare name="randomLetter" type="Integer" array="False" size=""/>
+            <declare name="guesses" type="Integer" array="False" size=""/>
+            <assign variable="guesses" expression="10"/>
+            <declare name="codeLength" type="Integer" array="False" size=""/>
+            <assign variable="codeLength" expression="4"/>
+            <declare name="colorCount" type="Integer" array="False" size=""/>
+            <assign variable="colorCount" expression="6"/>
+            <declare name="firstAttempt" type="Boolean" array="False" size=""/>
+            <assign variable="firstAttempt" expression="false"/>
+            <declare name="wrongInput" type="Boolean" array="False" size=""/>
+            <assign variable="wrongInput" expression="false"/>
+            <declare name="isValid" type="Boolean" array="False" size=""/>
+            <assign variable="isValid" expression="false"/>
+            <declare name="colors" type="String" array="True" size="6"/>
+            <assign variable="colors[0]" expression="&quot;R&quot;"/>
+            <assign variable="colors[1]" expression="&quot;G&quot;"/>
+            <assign variable="colors[2]" expression="&quot;B&quot;"/>
+            <assign variable="colors[3]" expression="&quot;Y&quot;"/>
+            <assign variable="colors[4]" expression="&quot;P&quot;"/>
+            <assign variable="colors[5]" expression="&quot;O&quot;"/>
+            <declare name="containsChar" type="Boolean" array="False" size=""/>
+            <output expression="&quot;Welcome to MasterMind&quot;" newline="True"/>
+            <output expression="&quot;Please... (drumroll.mp3) Enter Your Name Down Below!&quot;" newline="True"/>
+            <input variable="name"/>
+            <for variable="i" start="0" end="codeLength - 1" direction="inc" step="1">
+                <assign variable="randomLetter" expression="Random(colorCount - 1)"/>
+                <assign variable="secretCode" expression="secretCode &amp; colors[randomLetter]"/>
+            </for>
+            <if expression="name == &quot;Admin&quot;">
+                <then>
+                    <output expression="secretCode" newline="True"/>
+                </then>
+                <else/>
+            </if>
+            <output expression="&quot;Hello, &quot; &amp; name &amp; &quot;! Lets Stop All This Yapping And Get Straight To Bussiness!&quot;" newline="True"/>
+            <for variable="i" start="0" end="guesses -1" direction="inc" step="1">
+                <output expression="&quot;[R, G, B, Y, P, O] (Also Please Use CAPITALS!!!)&quot;" newline="True"/>
+                <output expression="&quot;Guess: &quot; &amp; (i + 1) &amp; &quot;/10&quot;" newline="True"/>
+                <input variable="userCode"/>
+                <assign variable="firstAttempt" expression="true"/>
+                <if expression="secretCode == userCode">
+                    <then>
+                        <output expression="&quot;Wow&quot;" newline="True"/>
+                        <breakpoint expression="" always="True"/>
+                    </then>
+                    <else/>
+                </if>
+                <if expression="Len(usercode) != Len(secretcode)">
+                    <then>
+                        <output expression="&quot;ERROR&quot;" newline="True"/>
+                        <output expression="&quot;Please Enter A Code Of At Least &quot; &amp; codeLength &amp; &quot; Characters Long&quot;" newline="True"/>
+                        <assign variable="i" expression="i - 1"/>
+                    </then>
+                    <else>
+                        <assign variable="outputCode" expression="&quot;&quot;"/>
+                        <for variable="i2" start="0" end="codeLength - 1" direction="inc" step="1">
+                            <if expression="Char(secretCode, i2) == Char(userCode, i2)">
+                                <then>
+                                    <assign variable="outputCode" expression="outputCode &amp; &quot;B&quot;"/>
+                                </then>
+                                <else>
+                                    <assign variable="containsChar" expression="false"/>
+                                    <for variable="i3" start="0" end="codeLength - 1" direction="inc" step="1">
+                                        <if expression="Char(secretCode, i3) == Char(userCode, i2)">
+                                            <then>
+                                                <assign variable="containsChar" expression="true"/>
+                                            </then>
+                                            <else/>
+                                        </if>
+                                    </for>
+                                    <if expression="containsChar">
+                                        <then>
+                                            <assign variable="outputCode" expression="outputCode &amp; &quot;W&quot;"/>
+                                        </then>
+                                        <else>
+                                            <assign variable="outputCode" expression="outputCode &amp; &quot;-&quot;"/>
+                                        </else>
+                                    </if>
+                                </else>
+                            </if>
+                        </for>
+                        <output expression="outputCode" newline="True"/>
+                    </else>
+                </if>
+            </for>
+            <output expression="&quot;Womp Womp!&quot;" newline="True"/>
+        </body>
+    </function>
+</flowgorithm>
