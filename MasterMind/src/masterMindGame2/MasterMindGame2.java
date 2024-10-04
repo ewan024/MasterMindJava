@@ -21,8 +21,12 @@ public class MasterMindGame2 {
     	
     	boolean wrongInput = false;
     	
+    	//imports
+    	
     	Scanner sc = new Scanner(System.in);
     	Random r = new Random();
+    	
+    	//the (string) array list for the colors
     	
     	ArrayList<String> colors = new ArrayList<>();
     	colors.add("R");
@@ -57,28 +61,29 @@ public class MasterMindGame2 {
     	
     	System.out.println("Hello, " + name + "! Lets Start The Game!");
     	
-    	//beginning game
+    	//beginning game, defines the outside of the loop
     	
     	outerLoop: for (i = 0; i < guesses; i++) {
     		
-    		//amount of guesses left message
+    		//the amount of guesses left message
     		
     		System.out.println("\r\nGuess: " + (i + 1) + "/10\r\n" +
     					       "Please Choose Out Of Any Of The Following Colors: \r\n" + colors);
     		userCode = sc.nextLine();
     		
-    		//allows lowercasing to happen
+    		//validates lowercase input
     		
     		userCode = userCode.toUpperCase();
     		
-    		//winning message
+    		//checks if code is correct to the secret code
     		
     		if (secretCode.equals(userCode)) {
     			System.out.println("Wow! You Did It!");
+    			sc.close();
     			return;
     		}
     		
-    		//error if text is not equal to codelength
+    		//error if text is not equal to the code length
     		
     		if (userCode.length() != codeLength) {
     			System.out.println("\r\nERROR\r\n" +
@@ -122,5 +127,6 @@ public class MasterMindGame2 {
     	System.out.println("Womp Womp!");
     	
     	sc.close();
+    	
 	}
 }
