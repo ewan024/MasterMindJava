@@ -7,17 +7,23 @@ public class MasterMindGame2 {
     	
     	//variables
     	
+    	//strings
+    	
     	String name;
     	String bobTheCharacter;
     	String secretCode = "";
     	String userCode;
     	String outputCode;
     	
+    	//intergers
+    	
     	int i;
     	int i2;
     	int randomLetter;
     	int guesses = 10;
     	int codeLength = 4;
+    	
+    	//booleans
     	
     	boolean wrongInput = false;
     	
@@ -59,6 +65,8 @@ public class MasterMindGame2 {
     		System.out.println(secretCode);
     	}
     	
+    	//start message
+    	
     	System.out.println("Hello, " + name + "! Lets Start The Game!");
     	
     	//beginning game, defines the outside of the loop
@@ -92,25 +100,38 @@ public class MasterMindGame2 {
     			continue;
     		}
     		
+    		//makes sure evaluation code does not print multiple times
     		outputCode = "";
     		
-    		//checks what letters equal or are in the code
+    		//code evaluation
     		
     		for (i2 = 0; i2 < codeLength; i2++) {
+    			
+    			//converts a string into a character
     			
     			bobTheCharacter = "" + userCode.charAt(i2);
     			if (colors.contains(bobTheCharacter)) {
     				
+    				//checks if user code if in the right place and the right character
+    				
 	    			if (secretCode.charAt(i2) == userCode.charAt(i2)) {
 	    				outputCode = outputCode + "B";
     				}
+	    			
+	    			//checks if user code is the right character but not in the right spot
+	    			
     				else if(secretCode.contains(bobTheCharacter)) {
     					outputCode = outputCode + "W";
     				}
+	    			
+	    			//checks if the user code is not in the right place nor in the right spot
+	    			
     				else {
     					outputCode = outputCode + "-";
     				}
     			}
+    			
+    			//checks if code has ONLY valid letter
     			else {
     	    		wrongInput = true;
     	    		System.out.println("\r\nERROR\r\n" +
@@ -119,12 +140,17 @@ public class MasterMindGame2 {
     	    		continue outerLoop;
     	    	}
     		}
+    		
+    		//prints evaluation code
+    		
     		System.out.println("\r\n" + outputCode);
     	}
     	
     	//lose message
     	
     	System.out.println("Womp Womp!");
+    	
+    	//closes scanner
     	
     	sc.close();
     	
