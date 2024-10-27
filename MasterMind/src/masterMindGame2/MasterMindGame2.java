@@ -20,7 +20,7 @@ public class MasterMindGame2 {
     	int i;
     	int i2;
     	int randomLetter;
-    	int guesses = 10;
+    	int guesses = 100;
     	int codeLength = 4;
     	
     	//booleans
@@ -110,6 +110,9 @@ public class MasterMindGame2 {
     			//converts a string into a character
     			
     			bobTheCharacter = "" + userCode.charAt(i2);
+    			
+    			//checks if code has ONLY valid letter pt. 1
+    			
     			if (colors.contains(bobTheCharacter)) {
     				
     				//checks if user code if in the right place and the right character
@@ -131,7 +134,7 @@ public class MasterMindGame2 {
     				}
     			}
     			
-    			//checks if code has ONLY valid letter
+    			//checks if code has ONLY valid letter pt. 2
     			else {
     	    		wrongInput = true;
     	    		System.out.println("\r\nERROR\r\n" +
